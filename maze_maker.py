@@ -42,15 +42,13 @@ def build_grid(cell_size, grid_size):
 def create_maze(x, y):
     visited.append((x,y))
     stack.append((x,y))
-    draw_nose(x,y)
-    
+
     while stack:
         # check for neighbours
         neighbours = check_neighbourhood(x, y)
 
         if neighbours:
             cell_x, cell_y = random.choice(neighbours)
-            print(f'trying neighbour cell: x = {cell_x}, y = {cell_y}')
             # draw progression
             if cell_x == x and cell_y > y:
                 grow_down(x,y)
@@ -59,16 +57,16 @@ def create_maze(x, y):
             elif cell_y == y and cell_x > x:
                 grow_right(x,y)
             else:
-                grow_left(x,y)    
-            time.sleep(0.1)
+                grow_left(x,y) 
+            time.sleep(0.05)   
 
             create_maze(cell_x, cell_y)
 
         else:
-            new_x, new_y = stack.pop()
-            draw_backtrack(x, y)
-            print(f'trying new cell: x = {new_x}, y = {new_y}')
-            create_maze(new_x, new_y)
+            x, y = stack.pop()
+
+
+# ------   set up functions ------- #
 
 def check_neighbourhood(x,y):
     neighbours = []
