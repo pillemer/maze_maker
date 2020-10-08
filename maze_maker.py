@@ -138,11 +138,12 @@ draw_solution(x,y)
 
 
 # ------ pygame loop
-running = True
-while running:
-    clock.tick(FPS)
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT:
-            pygame.quit()
-            running = False
-    pygame.display.update()
+if __name__ == "__main__":
+    running = True
+    while running:
+        clock.tick(FPS)
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                running = False
+        pygame.display.update()
