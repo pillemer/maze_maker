@@ -8,10 +8,12 @@ HEIGHT = 600
 FPS = 30
 
 # pygame window set up 
-pygame.init()
-SCREEN = pygame.display.set_mode((WIDTH, HEIGHT))
-pygame.display.set_caption('Maze Generator')
-clock = pygame.time.Clock()
+def set_up():
+    pygame.init()
+    SCREEN = pygame.display.set_mode((WIDTH, HEIGHT))
+    pygame.display.set_caption('Maze Generator')
+    clock = pygame.time.Clock()
+    return SCREEN, clock
 
 # colours
 BLACK = (0,   0,   0  )
@@ -21,7 +23,7 @@ RED =   (255, 0,   0  )
 GREEN = (0,   255, 0  )
 
 # initial grid settings
-cell_size = 20
+cell_size = 60
 grid_size = WIDTH // cell_size 
 
 grid = []
@@ -126,19 +128,21 @@ def draw_solution(x, y):
         time.sleep(0.05)
         x, y = path[x, y]
 
-
-# ------ make it go
-build_grid(cell_size, grid_size)
-create_maze(0,0)  # start the maze in the top left corner
-
-# draw the maze solution starting from the bottom right corner
-
-x,y = grid[len(grid)-1]
-draw_solution(x,y)
-
-
-# ------ pygame loop
 if __name__ == "__main__":
+
+    SCREEN, clock = set_up()
+
+    # ------ make it go
+    build_grid(cell_size, grid_size)
+    create_maze(0,0)  # start the maze in the top left corner
+
+    # draw the maze solution starting from the bottom right corner
+
+    x,y = grid[len(grid)-1]
+    draw_solution(x,y)
+
+
+    # ------ pygame loop
     running = True
     while running:
         clock.tick(FPS)
